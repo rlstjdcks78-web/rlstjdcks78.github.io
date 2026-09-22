@@ -1,436 +1,416 @@
-{\rtf1\ansi\ansicpg949\cocoartf2822
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김성찬 | Portfolio : 논리 + 창의</title>
+    <style>
+        /* [1] 전역 및 리셋 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; overflow: hidden; font-family: 'Pretendard', -apple-system, sans-serif; background-color: #fff; color: #333; }
+        
+        /* [2] 인트로 비디오 */
+        #intro-video {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 100;
+            transition: opacity 1s ease; cursor: pointer;
+        }
 
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="ko">\
-<head>\
-    <meta charset="UTF-8">\
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-    <title>\uc0\u44608 \u49457 \u52268  | Portfolio : \u45436 \u47532  + \u52285 \u51032 </title>\
-    <style>\
-        /* [1] \uc0\u51204 \u50669  \u48143  \u47532 \u49483  */\
-        * \{ margin: 0; padding: 0; box-sizing: border-box; \}\
-        body, html \{ width: 100%; height: 100%; overflow: hidden; font-family: 'Pretendard', -apple-system, sans-serif; background-color: #fff; color: #333; \}\
-        \
-        /* [2] \uc0\u51064 \u53944 \u47196  \u48708 \u46356 \u50724  */\
-        #intro-video \{\
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 100;\
-            transition: opacity 1s ease; cursor: pointer;\
-        \}\
-\
-        /* [3] \uc0\u52884 \u48260 \u49828  \u48143  \u52258 \u44608  \u53944 \u47532 \u44144  (\u48708 \u48128  \u50500 \u51648 \u53944 ) */\
-        #paper-canvas \{\
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 50; pointer-events: none;\
-        \}\
-        .trigger-zone \{\
-            position: absolute; width: 130px; height: 130px; z-index: 60; cursor: pointer;\
-            border-radius: 50%; opacity: 0; /* \uc0\u49884 \u44033 \u51201 \u51004 \u47196  \u49704 \u44608  */\
-            transition: opacity 0.3s ease;\
-        \}\
-        /* 4\uc0\u44060  \u44396 \u50669  \u48520 \u44508 \u52825  \u48176 \u52824  */\
-        #trigger-1 \{ top: 15%; left: 20%; \}\
-        #trigger-2 \{ top: 60%; left: 15%; \}\
-        #trigger-3 \{ top: 25%; right: 20%; \}\
-        #trigger-4 \{ bottom: 15%; right: 25%; \}\
-\
-        /* [4] \uc0\u53080 \u53584 \u52768  \u52968 \u53580 \u51060 \u45320  \u48143  \u52309 \u53552  \u44277 \u53685  */\
-        #content-layer \{\
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;\
-            display: flex; justify-content: center; align-items: center; padding: 40px;\
-        \}\
-        .chapter-card \{\
-            width: 100%; max-width: 1100px; height: 100%; max-height: 800px;\
-            background-color: #FDFBF7; /* \uc0\u53356 \u47548 \u49353  */\
-            border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.05);\
-            padding: 50px; display: none; opacity: 0; transform: scale(0.95);\
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);\
-            overflow-y: auto; position: relative;\
-        \}\
-        .chapter-card.active \{ display: block; opacity: 1; transform: scale(1); z-index: 20; \}\
-        .back-btn \{\
-            position: absolute; top: 40px; right: 40px; padding: 10px 20px; font-weight: 600;\
-            background: #fff; border: 1px solid #ddd; border-radius: 30px; cursor: pointer; transition: 0.2s;\
-        \}\
-        .back-btn:hover \{ background: #333; color: #fff; \}\
-        h2.chapter-title \{ font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; letter-spacing: -1px; \}\
-\
-        /* [5] Taste \uc0\u52309 \u53552  \u53945 \u54868  (LP \u54540 \u47112 \u51060 \u50612  & \u48324 \u51088 \u47532  \u53440 \u51076 \u46972 \u51064 ) */\
-        .taste-layout \{ display: flex; gap: 40px; height: calc(100% - 80px); \}\
-        .taste-left \{ flex: 1; display: flex; flex-direction: column; gap: 30px; \}\
-        .taste-right \{ flex: 2; position: relative; background: #111; border-radius: 15px; overflow: hidden; \}\
-\
-        /* LP \uc0\u54540 \u47112 \u51060 \u50612  */\
-        .lp-container \{ background: #fff; padding: 20px; border-radius: 15px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); text-align: center; \}\
-        .turntable \{ width: 150px; height: 150px; background: #e0e0e0; border-radius: 50%; margin: 0 auto 20px; position: relative; border: 5px solid #ccc; \}\
-        .turntable::after \{ content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 10px; height: 10px; background: #666; border-radius: 50%; \}\
-        .lp-records \{ display: flex; justify-content: center; gap: 15px; \}\
-        .record \{ width: 60px; height: 60px; background: #222; border-radius: 50%; cursor: grab; position: relative; border: 2px solid #000; box-shadow: 0 4px 6px rgba(0,0,0,0.2); \}\
-        .record::after \{ content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; border-radius: 50%; \}\
-        .record[data-id="1"]::after \{ background: #ff4757; \}\
-        .record[data-id="2"]::after \{ background: #1e90ff; \}\
-        .record[data-id="3"]::after \{ background: #2ed573; \}\
-        .turntable.playing .record \{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; animation: spin 4s linear infinite; \}\
-        @keyframes spin \{ 100% \{ transform: rotate(360deg); \} \}\
-\
-        /* \uc0\u50577 \u51088 \u47532  \u48324 \u51088 \u47532  \u53440 \u51076 \u46972 \u51064  */\
-        .constellation-map \{ width: 100%; height: 100%; position: relative; color: #fff; \}\
-        .constellation-title \{ position: absolute; top: 20px; left: 20px; font-size: 1.2rem; color: #aaa; z-index: 2; \}\
-        .filters \{ position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 2; \}\
-        .filter-btn \{ background: rgba(255,255,255,0.1); border: 1px solid #555; color: #fff; padding: 5px 12px; border-radius: 15px; cursor: pointer; font-size: 0.8rem; \}\
-        .filter-btn.active \{ background: #fff; color: #000; \}\
-        \
-        .star-node \{\
-            position: absolute; width: 10px; height: 10px; background: #fff; border-radius: 50%;\
-            transform: translate(-50%, -50%); cursor: pointer; box-shadow: 0 0 10px #fff;\
-            transition: all 0.3s ease;\
-        \}\
-        .star-node.career \{ box-shadow: 0 0 15px #4ea8de, 0 0 30px #4ea8de; background: #e0fbfc; \}\
-        .star-node.travel \{ box-shadow: 0 0 15px #ffb703, 0 0 30px #ffb703; background: #fff0c7; \}\
-        .star-node.food \{ box-shadow: 0 0 15px #fb8500, 0 0 30px #fb8500; background: #ffd6a5; \}\
-        .star-node.dimmed \{ opacity: 0.2; box-shadow: none; pointer-events: none; \}\
-        \
-        .polaroid-tooltip \{\
-            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 220px;\
-            background: #fff; color: #000; padding: 15px 15px 25px; border-radius: 5px;\
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5); pointer-events: none; opacity: 0;\
-            transition: opacity 0.3s; z-index: 10; text-align: center;\
-        \}\
-        .polaroid-tooltip.show \{ opacity: 1; \}\
-        .polaroid-tooltip .date \{ font-weight: 700; color: #555; font-size: 0.85rem; margin-bottom: 8px; \}\
-        .polaroid-tooltip .desc \{ font-size: 0.95rem; word-break: keep-all; \}\
-        \
-        canvas#lines-canvas \{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; \}\
-    </style>\
-</head>\
-<body>\
-\
-    <!-- 1. \uc0\u51064 \u53944 \u47196  \u50689 \u49345  (URL \u45824 \u49888  \u47196 \u52972  \u54028 \u51068  \u49324 \u50857  \u44428 \u51109 , \u49324 \u50857 \u51088  \u53364 \u47533  \u49884  \u49828 \u53429 ) -->\
-    <video id="intro-video" src="./intro.mp4" autoplay playsinline></video>\
-\
-    <!-- 2. \uc0\u48708 \u48128  \u50500 \u51648 \u53944  \u48177 \u51648  \u52884 \u48260 \u49828  -->\
-    <canvas id="paper-canvas"></canvas>\
-\
-    <!-- 3. \uc0\u47560 \u50864 \u49828  \u54840 \u48260  \u49884  \u52258 \u50612 \u51648 \u45716  4\u44060 \u51032  \u48708 \u48128  \u44396 \u50669  -->\
-    <div id="triggers">\
-        <div class="trigger-zone" id="trigger-1" data-target="chapter-identity"></div>\
-        <div class="trigger-zone" id="trigger-2" data-target="chapter-experience"></div>\
-        <div class="trigger-zone" id="trigger-3" data-target="chapter-taste"></div>\
-        <div class="trigger-zone" id="trigger-4" data-target="chapter-channels"></div>\
-    </div>\
-\
-    <!-- 4. \uc0\u49892 \u51228  \u53080 \u53584 \u52768  \u47112 \u51060 \u50612  -->\
-    <div id="content-layer">\
-        \
-        <!-- Chapter 1: Identity -->\
-        <div id="chapter-identity" class="chapter-card">\
-            <button class="back-btn">\uc0\u8592  \u48177 \u51648 \u47196  \u46028 \u50500 \u44032 \u44592 </button>\
-            <h2 class="chapter-title">Identity. \uc0\u45436 \u47532  + \u52285 \u51032  = \u44608 \u49457 \u52268 </h2>\
-            <p>\uc0\u50689 \u50612 \u54617 \u51032  \u52824 \u48128 \u54620  \u44508 \u52825 \u51012  \u53456 \u44396 \u54616 \u45716  \u45436 \u47532 \u50752 , \u48712 \u51665 \u51012  \u47928 \u54868  \u44277 \u44036 \u51004 \u47196  \u44592 \u54925 \u54616 \u44256  \u49352 \u47196 \u50868  \u50836 \u47532 \u47484  \u49892 \u54744 \u54616 \u45716  \u52285 \u51032 \u49457 .<br>\u51060  \u46160  \u44032 \u51648  \u51060 \u51656 \u51201 \u51064  \u50836 \u49548 \u44032  \u50997 \u54633 \u46104 \u50612  \u51200 \u47564 \u51032  \u44256 \u50976 \u54620  \u51221 \u52404 \u49457 \u51012  \u54805 \u49457 \u54633 \u45768 \u45796 .</p>\
-        </div>\
-\
-        <!-- Chapter 2: Experience -->\
-        <div id="chapter-experience" class="chapter-card">\
-            <button class="back-btn">\uc0\u8592  \u48177 \u51648 \u47196  \u46028 \u50500 \u44032 \u44592 </button>\
-            <h2 class="chapter-title">Experience.</h2>\
-            <p>\uc0\u51204 \u51452  \u47336 \u54532  \u54532 \u47196 \u51229 \u53944 , 22\u51064  \u48393 \u49324 \u45800  \u44592 \u54925 , \u44368 \u50977  \u49892 \u49845  \u46321  \u51452 \u50836  \u44221 \u54744 \u46308 \u51060  \u46308 \u50612 \u44040  \u44277 \u44036 \u51077 \u45768 \u45796 .</p>\
-        </div>\
-\
-        <!-- Chapter 3: Taste (LP + \uc0\u48324 \u51088 \u47532  \u47605 ) -->\
-        <div id="chapter-taste" class="chapter-card">\
-            <button class="back-btn">\uc0\u8592  \u48177 \u51648 \u47196  \u46028 \u50500 \u44032 \u44592 </button>\
-            <h2 class="chapter-title">Taste.</h2>\
-            <div class="taste-layout">\
-                <!-- \uc0\u51340 \u52769 : LP \u54540 \u47112 \u51060 \u50612  -->\
-                <div class="taste-left">\
-                    <div class="lp-container">\
-                        <h3>Secret Playlist</h3>\
-                        <p style="font-size:0.8rem; margin-bottom:15px; color:#666;">LP\uc0\u47484  \u53556 \u53580 \u51060 \u48660  \u50948 \u47196  \u50732 \u47140 \u48372 \u49464 \u50836 </p>\
-                        <div class="turntable" id="turntable" ondragover="allowDrop(event)" ondrop="drop(event)">\
-                            <audio id="bg-audio" src=""></audio>\
-                        </div>\
-                        <div class="lp-records">\
-                            <div class="record" data-id="1" draggable="true" ondragstart="drag(event)"></div>\
-                            <div class="record" data-id="2" draggable="true" ondragstart="drag(event)"></div>\
-                            <div class="record" data-id="3" draggable="true" ondragstart="drag(event)"></div>\
-                        </div>\
-                        <p id="now-playing" style="margin-top:15px; font-weight:bold; color:#ff4757;"></p>\
-                    </div>\
-                </div>\
-                <!-- \uc0\u50864 \u52769 : \u48324 \u51088 \u47532  \u53440 \u51076 \u46972 \u51064  (Aries) -->\
-                <div class="taste-right">\
-                    <div class="constellation-map" id="constellation">\
-                        <div class="constellation-title">Aries (2000.04.12) - The Secret Map</div>\
-                        <div class="filters">\
-                            <button class="filter-btn active" data-filter="all">All</button>\
-                            <button class="filter-btn" data-filter="career">Career</button>\
-                            <button class="filter-btn" data-filter="travel">Travel</button>\
-                            <button class="filter-btn" data-filter="food">Food</button>\
-                        </div>\
-                        <canvas id="lines-canvas"></canvas>\
-                        <div id="stars-container"></div>\
-                        <div class="polaroid-tooltip" id="tooltip">\
-                            <div class="date" id="tt-date"></div>\
-                            <div class="desc" id="tt-desc"></div>\
-                        </div>\
-                    </div>\
-                </div>\
-            </div>\
-        </div>\
-\
-        <!-- Chapter 4: Channels -->\
-        <div id="chapter-channels" class="chapter-card">\
-            <button class="back-btn">\uc0\u8592  \u48177 \u51648 \u47196  \u46028 \u50500 \u44032 \u44592 </button>\
-            <h2 class="chapter-title">Channels.</h2>\
-            <p>\uc0\u51060 \u47141 \u49436 , \u51060 \u47700 \u51068 , \u47553 \u53356 \u46300 \u51064  \u46321  \u50672 \u46973  \u52292 \u45328 \u51060  \u46308 \u50612 \u44040  \u44277 \u44036 \u51077 \u45768 \u45796 .</p>\
-        </div>\
-    </div>\
-\
-    <!-- \uc0\u51088 \u48148 \u49828 \u53356 \u47549 \u53944  \u47196 \u51649  -->\
-    <script>\
-        // ----------------------------------------------------\
-        // [1] \uc0\u51064 \u53944 \u47196  \u48708 \u46356 \u50724  \u51228 \u50612 \
-        // ----------------------------------------------------\
-        const video = document.getElementById('intro-video');\
-        \
-        function hideVideo() \{\
-            if(video.style.opacity === '0') return;\
-            video.style.opacity = '0';\
-            setTimeout(() => \{ video.style.display = 'none'; \}, 1000);\
-        \}\
-        \
-        // \uc0\u50689 \u49345 \u51060  \u45149 \u45208 \u44144 \u45208  \u53364 \u47533 \u54616 \u47732  \u48177 \u51648 \u47196  \u51204 \u54872 \
-        video.addEventListener('ended', hideVideo);\
-        video.addEventListener('click', hideVideo);\
-\
-        // ----------------------------------------------------\
-        // [2] \uc0\u52884 \u48260 \u49828  \u52258 \u44608  (destination-out) \u47196 \u51649 \
-        // ----------------------------------------------------\
-        const canvas = document.getElementById('paper-canvas');\
-        const ctx = canvas.getContext('2d');\
-        const triggers = document.querySelectorAll('.trigger-zone');\
-        const cards = document.querySelectorAll('.chapter-card');\
-        const backBtns = document.querySelectorAll('.back-btn');\
-\
-        function resizeCanvas() \{\
-            canvas.width = window.innerWidth;\
-            canvas.height = window.innerHeight;\
-            fillWhite();\
-        \}\
-        function fillWhite() \{\
-            ctx.globalCompositeOperation = 'source-over';\
-            ctx.fillStyle = '#ffffff';\
-            ctx.fillRect(0, 0, canvas.width, canvas.height);\
-        \}\
-        window.addEventListener('resize', resizeCanvas);\
-        resizeCanvas();\
-\
-        let isRevealed = false;\
-\
-        // \uc0\u47560 \u50864 \u49828  \u54840 \u48260  \u49884  \u51312 \u44552 \u50473  \u52258 \u50612 \u51648 \u45716  \u54952 \u44284 \
-        triggers.forEach(trigger => \{\
-            trigger.addEventListener('mousemove', (e) => \{\
-                if(isRevealed) return;\
-                const rect = canvas.getBoundingClientRect();\
-                const x = e.clientX - rect.left;\
-                const y = e.clientY - rect.top;\
-                \
-                ctx.globalCompositeOperation = 'destination-out';\
-                ctx.beginPath();\
-                // \uc0\u48520 \u44508 \u52825 \u54620  \u48652 \u47084 \u49884  \u47784 \u50577 \
-                const radius = 20 + Math.random() * 15; \
-                ctx.arc(x, y, radius, 0, Math.PI * 2);\
-                ctx.fill();\
-            \});\
-\
-            // \uc0\u53364 \u47533  \u49884  \u50756 \u51204 \u55176  \u52258 \u50612 \u51648 \u47728  \u54644 \u45817  \u52309 \u53552  \u46321 \u51109 \
-            trigger.addEventListener('click', (e) => \{\
-                isRevealed = true;\
-                const targetId = trigger.getAttribute('data-target');\
-                \
-                // \uc0\u45796 \u47480  \u53944 \u47532 \u44144  \u48708 \u54876 \u49457 \u54868 (\u49704 \u44608 )\
-                triggers.forEach(t => t.style.pointerEvents = 'none');\
-\
-                // \uc0\u52884 \u48260 \u49828  \u51204 \u52404  \u51648 \u50864 \u44592  \u50528 \u45768 \u47700 \u51060 \u49496  (\u51216 \u51652 \u51201  \u54869 \u51109 )\
-                let radius = 50;\
-                const expandTear = setInterval(() => \{\
-                    ctx.globalCompositeOperation = 'destination-out';\
-                    ctx.beginPath();\
-                    ctx.arc(e.clientX, e.clientY, radius, 0, Math.PI * 2);\
-                    ctx.fill();\
-                    radius += 60;\
-                    if(radius > Math.max(canvas.width, canvas.height) * 1.5) \{\
-                        clearInterval(expandTear);\
-                        // \uc0\u54644 \u45817  \u52309 \u53552  \u48372 \u51060 \u44592 \
-                        document.getElementById(targetId).classList.add('active');\
-                    \}\
-                \}, 16);\
-            \});\
-        \});\
-\
-        // \uc0\u46244 \u47196 \u44032 \u44592  \u48260 \u53948  \u47196 \u51649 \
-        backBtns.forEach(btn => \{\
-            btn.addEventListener('click', () => \{\
-                cards.forEach(card => card.classList.remove('active'));\
-                fillWhite(); // \uc0\u48177 \u51648  \u48373 \u44396 \
-                isRevealed = false;\
-                triggers.forEach(t => t.style.pointerEvents = 'auto'); // \uc0\u53944 \u47532 \u44144  \u48373 \u44396 \
-            \});\
-        \});\
-\
-        // ----------------------------------------------------\
-        // [3] Taste \uc0\u52309 \u53552  - LP \u54540 \u47112 \u51060 \u50612  \u46300 \u47000 \u44536  \u50532  \u46300 \u47213 \
-        // ----------------------------------------------------\
-        function allowDrop(ev) \{ ev.preventDefault(); \}\
-        function drag(ev) \{ ev.dataTransfer.setData("text", ev.target.getAttribute('data-id')); \}\
-        function drop(ev) \{\
-            ev.preventDefault();\
-            const recordId = ev.dataTransfer.getData("text");\
-            const turntable = document.getElementById('turntable');\
-            const draggedRecord = document.querySelector(`.record[data-id="$\{recordId\}"]`);\
-            \
-            // \uc0\u44592 \u51316  \u47112 \u53076 \u46300 \u44032  \u51080 \u45796 \u47732  \u51228 \u51088 \u47532 \u47196  \u48373 \u44480 \u49884 \u53412 \u45716  \u47196 \u51649  \u52628 \u44032  \u44032 \u45733 (\u54788 \u51116 \u45716  \u45800 \u49692 \u54868 )\
-            turntable.appendChild(draggedRecord);\
-            turntable.classList.add('playing');\
-            \
-            // \uc0\u44257  \u51228 \u47785  \u49464 \u54021 \
-            const titles = \{\
-                "1": "Now Playing: \uc0\u51116 \u51592  \u48148 \u51060 \u48652  - Track 1",\
-                "2": "Now Playing: \uc0\u51064 \u46356  \u54045  - Track 2",\
-                "3": "Now Playing: \uc0\u53364 \u47000 \u49885  - Track 3"\
-            \};\
-            document.getElementById('now-playing').innerText = titles[recordId];\
-            // audio.src = ... / audio.play() \uc0\u50672 \u46041  \u50948 \u52824 \
-        \}\
-\
-        // ----------------------------------------------------\
-        // [4] Taste \uc0\u52309 \u53552  - \u50577 \u51088 \u47532  \u48324 \u51088 \u47532  \u45936 \u51060 \u53552  \u48143  \u47116 \u45908 \u47553 \
-        // ----------------------------------------------------\
-        const rawData = [\
-            \{ date: '2020.02', type: 'travel', desc: '\uc0\u44053 \u50896 \u46020  \u49340 \u52377  \u50668 \u54665 ' \},\
-            \{ date: '2020.03', type: 'travel', desc: '\uc0\u51228 \u51452 \u46020  \u50668 \u54665 ' \},\
-            \{ date: '2021.03', type: 'career', desc: '\uc0\u51204 \u51452 \u45824 \u54617 \u44368  \u50689 \u50612 \u44368 \u50977 \u44284  \u51077 \u54617 ' \},\
-            \{ date: '2021.07', type: 'travel', desc: '\uc0\u50857 \u49328 , \u51060 \u53468 \u50896 , \u49457 \u49688  \u50500 \u48152 \u46524  N \u54045 \u50629 ' \},\
-            \{ date: '2021.08', type: 'food', desc: '\uc0\u51012 \u51648 \u47732 \u50725 , \u44256 \u49688  \u52853 \u53580 \u51068 ' \},\
-            \{ date: '2021.11', type: 'travel', desc: '\uc0\u50668 \u51088 \u52828 \u44396 \u50752  \u47215 \u45936 \u50900 \u46300  \u54624 \u47196 \u50952 , \u44256 \u52285  \u50668 \u54665 ' \},\
-            \{ date: '2022.02', type: 'travel', desc: '\uc0\u50668 \u49688 , \u48512 \u49328  \u49548 \u46020 \u49884  \u50668 \u54665 ' \},\
-            \{ date: '2022.03', type: 'career', desc: '\uc0\u44400  \u51077 \u45824  \u49884 \u51089 ' \},\
-            \{ date: '2023.03', type: 'travel', desc: '\uc0\u47560 \u46972 \u53668  \u50756 \u51452 ' \},\
-            \{ date: '2023.09', type: 'career', desc: '\uc0\u44400  \u51204 \u50669  \u54980  \u44592 \u49345 \u52397  \u51064 \u53556  \u49884 \u51089  (\u49888 \u45824 \u48169 \u49340 \u44144 \u47532  \u51088 \u52712 )' \},\
-            \{ date: '2023.10', type: 'food', desc: '\uc0\u45800 \u49352 \u50864  \u50864 \u45768  \u44048 \u53468 \u49928  \u51649 \u51217  \u49552 \u51656 ' \},\
-            \{ date: '2023.11', type: 'food', desc: '\uc0\u51333 \u47196  \u44404 \u48372 \u49928 \u44144 \u47532 , \u50668 \u51032 \u46020  \u50556 \u51109  \u53456 \u48169 ' \},\
-            \{ date: '2024.01', type: 'travel', desc: '\uc0\u50500 \u52264 \u49328  \u46321 \u48152  \u48143  \u54620 \u45224 \u46041  \u51204 \u49884 ' \},\
-            \{ date: '2024.03', type: 'career', desc: '\uc0\u45824 \u54617  \u51068 \u51088 \u47532  \u54540 \u47084 \u49828 \u49468 \u53552  \u49436 \u54252 \u53552 \u51592 , \u54617 \u49373 \u54924  \u44592 \u54925 \u48512 \u51109 ' \},\
-            \{ date: '2024.03', type: 'food', desc: '\uc0\u52572 \u50528  \u54943 \u51665  \u48177 \u51068 \u46020  \u48169 \u47928 ' \}\
-        ];\
-\
-        // \uc0\u45216 \u51676 \u49692  \u51221 \u47148  (\u44592 \u48376  \u51228 \u44277  \u45936 \u51060 \u53552 \u44032  \u49438 \u50668 \u51080 \u50612 \u46020  \u51088 \u46041  \u51221 \u47148 )\
-        rawData.sort((a, b) => a.date.localeCompare(b.date));\
-\
-        // \uc0\u50577 \u51088 \u47532 (Aries) \u54805 \u53468 \u51032  \u51340 \u54364  \u47112 \u51060 \u50500 \u50883  (x, y \u54140 \u49468 \u53944 )\
-        const ariesLayout = [\
-            \{x: 80, y: 30\}, \{x: 65, y: 40\}, \{x: 50, y: 45\}, \{x: 35, y: 48\}, \{x: 20, y: 55\},\
-            \{x: 10, y: 70\}, \{x: 25, y: 75\}, \{x: 40, y: 80\}, \{x: 50, y: 65\}, \{x: 60, y: 75\},\
-            \{x: 75, y: 85\}, \{x: 90, y: 70\}, \{x: 85, y: 50\}, \{x: 70, y: 20\}, \{x: 50, y: 15\}\
-        ];\
-\
-        const container = document.getElementById('stars-container');\
-        const tt = document.getElementById('tooltip');\
-        const ttDate = document.getElementById('tt-date');\
-        const ttDesc = document.getElementById('tt-desc');\
-        const linesCanvas = document.getElementById('lines-canvas');\
-        const lCtx = linesCanvas.getContext('2d');\
-\
-        function initConstellation() \{\
-            container.innerHTML = '';\
-            \
-            // \uc0\u45936 \u51060 \u53552  \u49688 \u50752  \u47112 \u51060 \u50500 \u50883  \u45432 \u46300  \u49688  \u47582 \u52628 \u44592 \
-            const renderCount = Math.min(rawData.length, ariesLayout.length);\
-            \
-            for(let i = 0; i < renderCount; i++) \{\
-                const data = rawData[i];\
-                const pos = ariesLayout[i];\
-                \
-                const star = document.createElement('div');\
-                star.className = `star-node $\{data.type\}`;\
-                star.style.left = `$\{pos.x\}%`;\
-                star.style.top = `$\{pos.y\}%`;\
-                star.dataset.type = data.type;\
-                \
-                // \uc0\u47560 \u50864 \u49828  \u54840 \u48260  \u51060 \u48292 \u53944 \
-                star.addEventListener('mouseenter', () => \{\
-                    ttDate.innerText = data.date;\
-                    ttDesc.innerText = data.desc;\
-                    tt.classList.add('show');\
-                \});\
-                star.addEventListener('mouseleave', () => \{\
-                    tt.classList.remove('show');\
-                \});\
-                \
-                container.appendChild(star);\
-            \}\
-            drawLines();\
-        \}\
-\
-        // \uc0\u48324 \u51088 \u47532  \u49440  \u44536 \u47532 \u44592 \
-        function drawLines() \{\
-            const mapRect = document.querySelector('.constellation-map').getBoundingClientRect();\
-            linesCanvas.width = mapRect.width;\
-            linesCanvas.height = mapRect.height;\
-            \
-            lCtx.clearRect(0, 0, linesCanvas.width, linesCanvas.height);\
-            lCtx.beginPath();\
-            lCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';\
-            lCtx.lineWidth = 1;\
-\
-            const stars = Array.from(document.querySelectorAll('.star-node:not(.dimmed)'));\
-            if(stars.length < 2) return;\
-\
-            // \uc0\u54364 \u49884 \u46108  \u48324 \u46308 \u45180 \u47532  \u49440 \u51004 \u47196  \u50672 \u44208 \
-            lCtx.moveTo(\
-                parseFloat(stars[0].style.left) / 100 * linesCanvas.width,\
-                parseFloat(stars[0].style.top) / 100 * linesCanvas.height\
-            );\
-            for(let i = 1; i < stars.length; i++) \{\
-                lCtx.lineTo(\
-                    parseFloat(stars[i].style.left) / 100 * linesCanvas.width,\
-                    parseFloat(stars[i].style.top) / 100 * linesCanvas.height\
-                );\
-            \}\
-            lCtx.stroke();\
-        \}\
-\
-        // \uc0\u54596 \u53552 \u47553  \u44592 \u45733 \
-        document.querySelectorAll('.filter-btn').forEach(btn => \{\
-            btn.addEventListener('click', (e) => \{\
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));\
-                e.target.classList.add('active');\
-                \
-                const filter = e.target.dataset.filter;\
-                document.querySelectorAll('.star-node').forEach(star => \{\
-                    if(filter === 'all' || star.dataset.type === filter) \{\
-                        star.classList.remove('dimmed');\
-                    \} else \{\
-                        star.classList.add('dimmed');\
-                    \}\
-                \});\
-                drawLines(); // \uc0\u49440  \u45796 \u49884  \u44536 \u47532 \u44592 \
-            \});\
-        \});\
-\
-        // \uc0\u50952 \u46020 \u50864  \u47532 \u49324 \u51060 \u51592  \u45824 \u51025 \
-        window.addEventListener('resize', () => \{\
-            if(document.getElementById('chapter-taste').classList.contains('active')) \{\
-                drawLines();\
-            \}\
-        \});\
-\
-        // \uc0\u52488 \u44592 \u54868  \u49892 \u54665 \
-        initConstellation();\
-\
-    </script>\
-</body>\
-</html>}
+        /* [3] 캔버스 및 찢김 트리거 (비밀 아지트) */
+        #paper-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 50; pointer-events: none;
+        }
+        .trigger-zone {
+            position: absolute; width: 130px; height: 130px; z-index: 60; cursor: pointer;
+            border-radius: 50%; opacity: 0; /* 시각적으로 숨김 */
+            transition: opacity 0.3s ease;
+        }
+        /* 4개 구역 불규칙 배치 */
+        #trigger-1 { top: 15%; left: 20%; }
+        #trigger-2 { top: 60%; left: 15%; }
+        #trigger-3 { top: 25%; right: 20%; }
+        #trigger-4 { bottom: 15%; right: 25%; }
+
+        /* [4] 콘텐츠 컨테이너 및 챕터 공통 */
+        #content-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;
+            display: flex; justify-content: center; align-items: center; padding: 40px;
+        }
+        .chapter-card {
+            width: 100%; max-width: 1100px; height: 100%; max-height: 800px;
+            background-color: #FDFBF7; /* 크림색 */
+            border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            padding: 50px; display: none; opacity: 0; transform: scale(0.95);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-y: auto; position: relative;
+        }
+        .chapter-card.active { display: block; opacity: 1; transform: scale(1); z-index: 20; }
+        .back-btn {
+            position: absolute; top: 40px; right: 40px; padding: 10px 20px; font-weight: 600;
+            background: #fff; border: 1px solid #ddd; border-radius: 30px; cursor: pointer; transition: 0.2s;
+        }
+        .back-btn:hover { background: #333; color: #fff; }
+        h2.chapter-title { font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; letter-spacing: -1px; }
+
+        /* [5] Taste 챕터 특화 (LP 플레이어 & 별자리 타임라인) */
+        .taste-layout { display: flex; gap: 40px; height: calc(100% - 80px); }
+        .taste-left { flex: 1; display: flex; flex-direction: column; gap: 30px; }
+        .taste-right { flex: 2; position: relative; background: #111; border-radius: 15px; overflow: hidden; }
+
+        /* LP 플레이어 */
+        .lp-container { background: #fff; padding: 20px; border-radius: 15px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); text-align: center; }
+        .turntable { width: 150px; height: 150px; background: #e0e0e0; border-radius: 50%; margin: 0 auto 20px; position: relative; border: 5px solid #ccc; }
+        .turntable::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 10px; height: 10px; background: #666; border-radius: 50%; }
+        .lp-records { display: flex; justify-content: center; gap: 15px; }
+        .record { width: 60px; height: 60px; background: #222; border-radius: 50%; cursor: grab; position: relative; border: 2px solid #000; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+        .record::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; border-radius: 50%; }
+        .record[data-id="1"]::after { background: #ff4757; }
+        .record[data-id="2"]::after { background: #1e90ff; }
+        .record[data-id="3"]::after { background: #2ed573; }
+        .turntable.playing .record { position: absolute; top: 0; left: 0; width: 100%; height: 100%; animation: spin 4s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* 양자리 별자리 타임라인 */
+        .constellation-map { width: 100%; height: 100%; position: relative; color: #fff; }
+        .constellation-title { position: absolute; top: 20px; left: 20px; font-size: 1.2rem; color: #aaa; z-index: 2; }
+        .filters { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 2; }
+        .filter-btn { background: rgba(255,255,255,0.1); border: 1px solid #555; color: #fff; padding: 5px 12px; border-radius: 15px; cursor: pointer; font-size: 0.8rem; }
+        .filter-btn.active { background: #fff; color: #000; }
+        
+        .star-node {
+            position: absolute; width: 10px; height: 10px; background: #fff; border-radius: 50%;
+            transform: translate(-50%, -50%); cursor: pointer; box-shadow: 0 0 10px #fff;
+            transition: all 0.3s ease;
+        }
+        .star-node.career { box-shadow: 0 0 15px #4ea8de, 0 0 30px #4ea8de; background: #e0fbfc; }
+        .star-node.travel { box-shadow: 0 0 15px #ffb703, 0 0 30px #ffb703; background: #fff0c7; }
+        .star-node.food { box-shadow: 0 0 15px #fb8500, 0 0 30px #fb8500; background: #ffd6a5; }
+        .star-node.dimmed { opacity: 0.2; box-shadow: none; pointer-events: none; }
+        
+        .polaroid-tooltip {
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 220px;
+            background: #fff; color: #000; padding: 15px 15px 25px; border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5); pointer-events: none; opacity: 0;
+            transition: opacity 0.3s; z-index: 10; text-align: center;
+        }
+        .polaroid-tooltip.show { opacity: 1; }
+        .polaroid-tooltip .date { font-weight: 700; color: #555; font-size: 0.85rem; margin-bottom: 8px; }
+        .polaroid-tooltip .desc { font-size: 0.95rem; word-break: keep-all; }
+        
+        canvas#lines-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. 인트로 영상 (로컬 파일) -->
+    <video id="intro-video" src="./intro.mp4" autoplay playsinline></video>
+
+    <!-- 2. 비밀 아지트 백지 캔버스 -->
+    <canvas id="paper-canvas"></canvas>
+
+    <!-- 3. 마우스 호버 시 찢어지는 4개의 비밀 구역 -->
+    <div id="triggers">
+        <div class="trigger-zone" id="trigger-1" data-target="chapter-identity"></div>
+        <div class="trigger-zone" id="trigger-2" data-target="chapter-experience"></div>
+        <div class="trigger-zone" id="trigger-3" data-target="chapter-taste"></div>
+        <div class="trigger-zone" id="trigger-4" data-target="chapter-channels"></div>
+    </div>
+
+    <!-- 4. 실제 콘텐츠 레이어 -->
+    <div id="content-layer">
+        
+        <!-- Chapter 1: Identity -->
+        <div id="chapter-identity" class="chapter-card">
+            <button class="back-btn">← 백지로 돌아가기</button>
+            <h2 class="chapter-title">Identity. 논리 + 창의 = 김성찬</h2>
+            <p>영어학의 치밀한 규칙을 탐구하는 논리와, 빈집을 문화 공간으로 기획하고 새로운 요리를 실험하는 창의성.<br>이 두 가지 이질적인 요소가 융합되어 저만의 고유한 정체성을 형성합니다.</p>
+        </div>
+
+        <!-- Chapter 2: Experience -->
+        <div id="chapter-experience" class="chapter-card">
+            <button class="back-btn">← 백지로 돌아가기</button>
+            <h2 class="chapter-title">Experience.</h2>
+            <p>전주 루프 프로젝트, 22인 봉사단 기획, 교육 실습 등 주요 경험들이 들어갈 공간입니다.</p>
+        </div>
+
+        <!-- Chapter 3: Taste (LP + 별자리 맵) -->
+        <div id="chapter-taste" class="chapter-card">
+            <button class="back-btn">← 백지로 돌아가기</button>
+            <h2 class="chapter-title">Taste.</h2>
+            <div class="taste-layout">
+                <!-- 좌측: LP 플레이어 -->
+                <div class="taste-left">
+                    <div class="lp-container">
+                        <h3>Secret Playlist</h3>
+                        <p style="font-size:0.8rem; margin-bottom:15px; color:#666;">LP를 턴테이블 위로 올려보세요</p>
+                        <div class="turntable" id="turntable" ondragover="allowDrop(event)" ondrop="drop(event)">
+                            <audio id="bg-audio" src=""></audio>
+                        </div>
+                        <div class="lp-records">
+                            <div class="record" data-id="1" draggable="true" ondragstart="drag(event)"></div>
+                            <div class="record" data-id="2" draggable="true" ondragstart="drag(event)"></div>
+                            <div class="record" data-id="3" draggable="true" ondragstart="drag(event)"></div>
+                        </div>
+                        <p id="now-playing" style="margin-top:15px; font-weight:bold; color:#ff4757;"></p>
+                    </div>
+                </div>
+                <!-- 우측: 별자리 타임라인 (Aries) -->
+                <div class="taste-right">
+                    <div class="constellation-map" id="constellation">
+                        <div class="constellation-title">Aries (2000.04.12) - The Secret Map</div>
+                        <div class="filters">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="career">Career</button>
+                            <button class="filter-btn" data-filter="travel">Travel</button>
+                            <button class="filter-btn" data-filter="food">Food</button>
+                        </div>
+                        <canvas id="lines-canvas"></canvas>
+                        <div id="stars-container"></div>
+                        <div class="polaroid-tooltip" id="tooltip">
+                            <div class="date" id="tt-date"></div>
+                            <div class="desc" id="tt-desc"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 4: Channels -->
+        <div id="chapter-channels" class="chapter-card">
+            <button class="back-btn">← 백지로 돌아가기</button>
+            <h2 class="chapter-title">Channels.</h2>
+            <p>이력서, 이메일, 링크드인 등 연락 채널이 들어갈 공간입니다.</p>
+        </div>
+    </div>
+
+    <!-- 자바스크립트 로직 -->
+    <script>
+        // ----------------------------------------------------
+        // [1] 인트로 비디오 제어
+        // ----------------------------------------------------
+        const video = document.getElementById('intro-video');
+        
+        function hideVideo() {
+            if(video.style.opacity === '0') return;
+            video.style.opacity = '0';
+            setTimeout(() => { video.style.display = 'none'; }, 1000);
+        }
+        
+        // 영상이 끝나거나 클릭하면 백지로 전환
+        video.addEventListener('ended', hideVideo);
+        video.addEventListener('click', hideVideo);
+
+        // ----------------------------------------------------
+        // [2] 캔버스 찢김 (destination-out) 로직
+        // ----------------------------------------------------
+        const canvas = document.getElementById('paper-canvas');
+        const ctx = canvas.getContext('2d');
+        const triggers = document.querySelectorAll('.trigger-zone');
+        const cards = document.querySelectorAll('.chapter-card');
+        const backBtns = document.querySelectorAll('.back-btn');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            fillWhite();
+        }
+        function fillWhite() {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        let isRevealed = false;
+
+        // 마우스 호버 시 조금씩 찢어지는 효과
+        triggers.forEach(trigger => {
+            trigger.addEventListener('mousemove', (e) => {
+                if(isRevealed) return;
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                // 불규칙한 브러시 모양
+                const radius = 20 + Math.random() * 15; 
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // 클릭 시 완전히 찢어지며 해당 챕터 등장
+            trigger.addEventListener('click', (e) => {
+                isRevealed = true;
+                const targetId = trigger.getAttribute('data-target');
+                
+                // 다른 트리거 비활성화(숨김)
+                triggers.forEach(t => t.style.pointerEvents = 'none');
+
+                // 캔버스 전체 지우기 애니메이션 (점진적 확장)
+                let radius = 50;
+                const expandTear = setInterval(() => {
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.beginPath();
+                    ctx.arc(e.clientX, e.clientY, radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    radius += 60;
+                    if(radius > Math.max(canvas.width, canvas.height) * 1.5) {
+                        clearInterval(expandTear);
+                        // 해당 챕터 보이기
+                        document.getElementById(targetId).classList.add('active');
+                    }
+                }, 16);
+            });
+        });
+
+        // 뒤로가기 버튼 로직
+        backBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                cards.forEach(card => card.classList.remove('active'));
+                fillWhite(); // 백지 복구
+                isRevealed = false;
+                triggers.forEach(t => t.style.pointerEvents = 'auto'); // 트리거 복구
+            });
+        });
+
+        // ----------------------------------------------------
+        // [3] Taste 챕터 - LP 플레이어 드래그 앤 드롭
+        // ----------------------------------------------------
+        function allowDrop(ev) { ev.preventDefault(); }
+        function drag(ev) { ev.dataTransfer.setData("text", ev.target.getAttribute('data-id')); }
+        function drop(ev) {
+            ev.preventDefault();
+            const recordId = ev.dataTransfer.getData("text");
+            const turntable = document.getElementById('turntable');
+            const draggedRecord = document.querySelector(`.record[data-id="${recordId}"]`);
+            
+            turntable.appendChild(draggedRecord);
+            turntable.classList.add('playing');
+            
+            const titles = {
+                "1": "Now Playing: 재즈 바이브 - Track 1",
+                "2": "Now Playing: 인디 팝 - Track 2",
+                "3": "Now Playing: 클래식 - Track 3"
+            };
+            document.getElementById('now-playing').innerText = titles[recordId];
+        }
+
+        // ----------------------------------------------------
+        // [4] Taste 챕터 - 양자리 별자리 데이터 및 렌더링
+        // ----------------------------------------------------
+        const rawData = [
+            { date: '2020.02', type: 'travel', desc: '강원도 삼척 여행' },
+            { date: '2020.03', type: 'travel', desc: '제주도 여행' },
+            { date: '2021.03', type: 'career', desc: '전주대학교 영어교육과 입학' },
+            { date: '2021.07', type: 'travel', desc: '용산, 이태원, 성수 아반떼 N 팝업' },
+            { date: '2021.08', type: 'food', desc: '을지면옥, 고수 칵테일' },
+            { date: '2021.11', type: 'travel', desc: '여자친구와 롯데월드 할로윈, 고창 여행' },
+            { date: '2022.02', type: 'travel', desc: '여수, 부산 소도시 여행' },
+            { date: '2022.03', type: 'career', desc: '군 입대 시작' },
+            { date: '2023.03', type: 'travel', desc: '마라톤 완주' },
+            { date: '2023.09', type: 'career', desc: '군 전역 후 기상청 인턴 시작 (신대방삼거리 자취)' },
+            { date: '2023.10', type: 'food', desc: '단새우 우니 감태쌈 직접 손질' },
+            { date: '2023.11', type: 'food', desc: '종로 굴보쌈거리, 여의도 야장 탐방' },
+            { date: '2024.01', type: 'travel', desc: '아차산 등반 및 한남동 전시' },
+            { date: '2024.03', type: 'career', desc: '대학 일자리 플러스센터 서포터즈, 학생회 기획부장' },
+            { date: '2024.03', type: 'food', desc: '최애 횟집 백일도 방문' }
+        ];
+
+        rawData.sort((a, b) => a.date.localeCompare(b.date));
+
+        const ariesLayout = [
+            {x: 80, y: 30}, {x: 65, y: 40}, {x: 50, y: 45}, {x: 35, y: 48}, {x: 20, y: 55},
+            {x: 10, y: 70}, {x: 25, y: 75}, {x: 40, y: 80}, {x: 50, y: 65}, {x: 60, y: 75},
+            {x: 75, y: 85}, {x: 90, y: 70}, {x: 85, y: 50}, {x: 70, y: 20}, {x: 50, y: 15}
+        ];
+
+        const container = document.getElementById('stars-container');
+        const tt = document.getElementById('tooltip');
+        const ttDate = document.getElementById('tt-date');
+        const ttDesc = document.getElementById('tt-desc');
+        const linesCanvas = document.getElementById('lines-canvas');
+        const lCtx = linesCanvas.getContext('2d');
+
+        function initConstellation() {
+            container.innerHTML = '';
+            
+            const renderCount = Math.min(rawData.length, ariesLayout.length);
+            
+            for(let i = 0; i < renderCount; i++) {
+                const data = rawData[i];
+                const pos = ariesLayout[i];
+                
+                const star = document.createElement('div');
+                star.className = `star-node ${data.type}`;
+                star.style.left = `${pos.x}%`;
+                star.style.top = `${pos.y}%`;
+                star.dataset.type = data.type;
+                
+                star.addEventListener('mouseenter', () => {
+                    ttDate.innerText = data.date;
+                    ttDesc.innerText = data.desc;
+                    tt.classList.add('show');
+                });
+                star.addEventListener('mouseleave', () => {
+                    tt.classList.remove('show');
+                });
+                
+                container.appendChild(star);
+            }
+            drawLines();
+        }
+
+        function drawLines() {
+            const mapRect = document.querySelector('.constellation-map').getBoundingClientRect();
+            linesCanvas.width = mapRect.width;
+            linesCanvas.height = mapRect.height;
+            
+            lCtx.clearRect(0, 0, linesCanvas.width, linesCanvas.height);
+            lCtx.beginPath();
+            lCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            lCtx.lineWidth = 1;
+
+            const stars = Array.from(document.querySelectorAll('.star-node:not(.dimmed)'));
+            if(stars.length < 2) return;
+
+            lCtx.moveTo(
+                parseFloat(stars[0].style.left) / 100 * linesCanvas.width,
+                parseFloat(stars[0].style.top) / 100 * linesCanvas.height
+            );
+            for(let i = 1; i < stars.length; i++) {
+                lCtx.lineTo(
+                    parseFloat(stars[i].style.left) / 100 * linesCanvas.width,
+                    parseFloat(stars[i].style.top) / 100 * linesCanvas.height
+                );
+            }
+            lCtx.stroke();
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                const filter = e.target.dataset.filter;
+                document.querySelectorAll('.star-node').forEach(star => {
+                    if(filter === 'all' || star.dataset.type === filter) {
+                        star.classList.remove('dimmed');
+                    } else {
+                        star.classList.add('dimmed');
+                    }
+                });
+                drawLines(); 
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if(document.getElementById('chapter-taste').classList.contains('active')) {
+                drawLines();
+            }
+        });
+
+        initConstellation();
+    </script>
+</body>
+</html>
