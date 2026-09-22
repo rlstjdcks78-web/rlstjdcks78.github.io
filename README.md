@@ -1,1 +1,0 @@
-# rlstjdcks78.github.io
