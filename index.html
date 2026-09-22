@@ -5,39 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>김성찬 | Portfolio : 논리 + 창의</title>
     <style>
-        /* [1] 전역 및 리셋 */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { width: 100%; height: 100%; overflow: hidden; font-family: 'Pretendard', -apple-system, sans-serif; background-color: #fff; color: #333; }
         
-        /* [2] 인트로 비디오 */
+        /* 인트로 비디오 */
         #intro-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 100;
-            transition: opacity 1s ease; cursor: pointer;
+            transition: opacity 1s ease; cursor: pointer; background-color: #fff;
         }
 
-        /* [3] 캔버스 및 찢김 트리거 (비밀 아지트) */
+        /* 캔버스 및 찢김 트리거 (비밀 아지트) */
         #paper-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 50; pointer-events: none;
         }
         .trigger-zone {
             position: absolute; width: 130px; height: 130px; z-index: 60; cursor: pointer;
-            border-radius: 50%; opacity: 0; /* 시각적으로 숨김 */
+            border-radius: 50%; opacity: 0; 
             transition: opacity 0.3s ease;
         }
-        /* 4개 구역 불규칙 배치 */
         #trigger-1 { top: 15%; left: 20%; }
         #trigger-2 { top: 60%; left: 15%; }
         #trigger-3 { top: 25%; right: 20%; }
         #trigger-4 { bottom: 15%; right: 25%; }
 
-        /* [4] 콘텐츠 컨테이너 및 챕터 공통 */
+        /* 콘텐츠 레이어 공통 */
         #content-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;
             display: flex; justify-content: center; align-items: center; padding: 40px;
         }
         .chapter-card {
             width: 100%; max-width: 1100px; height: 100%; max-height: 800px;
-            background-color: #FDFBF7; /* 크림색 */
+            background-color: #FDFBF7; 
             border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.05);
             padding: 50px; display: none; opacity: 0; transform: scale(0.95);
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -51,7 +49,7 @@
         .back-btn:hover { background: #333; color: #fff; }
         h2.chapter-title { font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; letter-spacing: -1px; }
 
-        /* [5] Taste 챕터 특화 (LP 플레이어 & 별자리 타임라인) */
+        /* Taste 챕터 특화 */
         .taste-layout { display: flex; gap: 40px; height: calc(100% - 80px); }
         .taste-left { flex: 1; display: flex; flex-direction: column; gap: 30px; }
         .taste-right { flex: 2; position: relative; background: #111; border-radius: 15px; overflow: hidden; }
@@ -69,7 +67,7 @@
         .turntable.playing .record { position: absolute; top: 0; left: 0; width: 100%; height: 100%; animation: spin 4s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* 양자리 별자리 타임라인 */
+        /* 양자리 타임라인 */
         .constellation-map { width: 100%; height: 100%; position: relative; color: #fff; }
         .constellation-title { position: absolute; top: 20px; left: 20px; font-size: 1.2rem; color: #aaa; z-index: 2; }
         .filters { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 2; }
@@ -101,13 +99,11 @@
 </head>
 <body>
 
-    <!-- 1. 인트로 영상 (로컬 파일) -->
-    <video id="intro-video" src="./intro.mp4" autoplay playsinline></video>
+    <!-- 1. 비디오 (에러 방지용 onerror 추가 및 강제 음소거 자동재생) -->
+    <video id="intro-video" src="./intro.mp4" autoplay muted playsinline onerror="hideVideo()"></video>
 
-    <!-- 2. 비밀 아지트 백지 캔버스 -->
     <canvas id="paper-canvas"></canvas>
 
-    <!-- 3. 마우스 호버 시 찢어지는 4개의 비밀 구역 -->
     <div id="triggers">
         <div class="trigger-zone" id="trigger-1" data-target="chapter-identity"></div>
         <div class="trigger-zone" id="trigger-2" data-target="chapter-experience"></div>
@@ -115,29 +111,24 @@
         <div class="trigger-zone" id="trigger-4" data-target="chapter-channels"></div>
     </div>
 
-    <!-- 4. 실제 콘텐츠 레이어 -->
     <div id="content-layer">
         
-        <!-- Chapter 1: Identity -->
         <div id="chapter-identity" class="chapter-card">
             <button class="back-btn">← 백지로 돌아가기</button>
             <h2 class="chapter-title">Identity. 논리 + 창의 = 김성찬</h2>
             <p>영어학의 치밀한 규칙을 탐구하는 논리와, 빈집을 문화 공간으로 기획하고 새로운 요리를 실험하는 창의성.<br>이 두 가지 이질적인 요소가 융합되어 저만의 고유한 정체성을 형성합니다.</p>
         </div>
 
-        <!-- Chapter 2: Experience -->
         <div id="chapter-experience" class="chapter-card">
             <button class="back-btn">← 백지로 돌아가기</button>
             <h2 class="chapter-title">Experience.</h2>
             <p>전주 루프 프로젝트, 22인 봉사단 기획, 교육 실습 등 주요 경험들이 들어갈 공간입니다.</p>
         </div>
 
-        <!-- Chapter 3: Taste (LP + 별자리 맵) -->
         <div id="chapter-taste" class="chapter-card">
             <button class="back-btn">← 백지로 돌아가기</button>
             <h2 class="chapter-title">Taste.</h2>
             <div class="taste-layout">
-                <!-- 좌측: LP 플레이어 -->
                 <div class="taste-left">
                     <div class="lp-container">
                         <h3>Secret Playlist</h3>
@@ -153,7 +144,6 @@
                         <p id="now-playing" style="margin-top:15px; font-weight:bold; color:#ff4757;"></p>
                     </div>
                 </div>
-                <!-- 우측: 별자리 타임라인 (Aries) -->
                 <div class="taste-right">
                     <div class="constellation-map" id="constellation">
                         <div class="constellation-title">Aries (2000.04.12) - The Secret Map</div>
@@ -174,7 +164,6 @@
             </div>
         </div>
 
-        <!-- Chapter 4: Channels -->
         <div id="chapter-channels" class="chapter-card">
             <button class="back-btn">← 백지로 돌아가기</button>
             <h2 class="chapter-title">Channels.</h2>
@@ -182,26 +171,30 @@
         </div>
     </div>
 
-    <!-- 자바스크립트 로직 -->
     <script>
-        // ----------------------------------------------------
-        // [1] 인트로 비디오 제어
-        // ----------------------------------------------------
         const video = document.getElementById('intro-video');
+        let videoHidden = false;
         
         function hideVideo() {
-            if(video.style.opacity === '0') return;
+            if(videoHidden) return;
+            videoHidden = true;
             video.style.opacity = '0';
-            setTimeout(() => { video.style.display = 'none'; }, 1000);
+            setTimeout(() => { video.style.display = 'none'; }, 500);
         }
         
-        // 영상이 끝나거나 클릭하면 백지로 전환
-        video.addEventListener('ended', hideVideo);
+        // 영상 클릭 시 강제 스킵 (발표용 필수)
         video.addEventListener('click', hideVideo);
+        // 영상 종류 시 넘어감
+        video.addEventListener('ended', hideVideo);
 
-        // ----------------------------------------------------
-        // [2] 캔버스 찢김 (destination-out) 로직
-        // ----------------------------------------------------
+        // 만약 영상이 안불러와지면 3초 후 강제로 스킵 (먹통 방지 안전장치)
+        setTimeout(() => {
+            if(video.readyState === 0) {
+                hideVideo();
+            }
+        }, 3000);
+
+        // 캔버스 찢김 로직
         const canvas = document.getElementById('paper-canvas');
         const ctx = canvas.getContext('2d');
         const triggers = document.querySelectorAll('.trigger-zone');
@@ -223,7 +216,6 @@
 
         let isRevealed = false;
 
-        // 마우스 호버 시 조금씩 찢어지는 효과
         triggers.forEach(trigger => {
             trigger.addEventListener('mousemove', (e) => {
                 if(isRevealed) return;
@@ -233,21 +225,16 @@
                 
                 ctx.globalCompositeOperation = 'destination-out';
                 ctx.beginPath();
-                // 불규칙한 브러시 모양
                 const radius = 20 + Math.random() * 15; 
                 ctx.arc(x, y, radius, 0, Math.PI * 2);
                 ctx.fill();
             });
 
-            // 클릭 시 완전히 찢어지며 해당 챕터 등장
             trigger.addEventListener('click', (e) => {
                 isRevealed = true;
                 const targetId = trigger.getAttribute('data-target');
-                
-                // 다른 트리거 비활성화(숨김)
                 triggers.forEach(t => t.style.pointerEvents = 'none');
 
-                // 캔버스 전체 지우기 애니메이션 (점진적 확장)
                 let radius = 50;
                 const expandTear = setInterval(() => {
                     ctx.globalCompositeOperation = 'destination-out';
@@ -257,26 +244,23 @@
                     radius += 60;
                     if(radius > Math.max(canvas.width, canvas.height) * 1.5) {
                         clearInterval(expandTear);
-                        // 해당 챕터 보이기
                         document.getElementById(targetId).classList.add('active');
+                        if(targetId === 'chapter-taste') drawLines();
                     }
                 }, 16);
             });
         });
 
-        // 뒤로가기 버튼 로직
         backBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 cards.forEach(card => card.classList.remove('active'));
-                fillWhite(); // 백지 복구
+                fillWhite(); 
                 isRevealed = false;
-                triggers.forEach(t => t.style.pointerEvents = 'auto'); // 트리거 복구
+                triggers.forEach(t => t.style.pointerEvents = 'auto'); 
             });
         });
 
-        // ----------------------------------------------------
-        // [3] Taste 챕터 - LP 플레이어 드래그 앤 드롭
-        // ----------------------------------------------------
+        // LP 드래그앤드롭
         function allowDrop(ev) { ev.preventDefault(); }
         function drag(ev) { ev.dataTransfer.setData("text", ev.target.getAttribute('data-id')); }
         function drop(ev) {
@@ -296,9 +280,7 @@
             document.getElementById('now-playing').innerText = titles[recordId];
         }
 
-        // ----------------------------------------------------
-        // [4] Taste 챕터 - 양자리 별자리 데이터 및 렌더링
-        // ----------------------------------------------------
+        // 별자리 타임라인
         const rawData = [
             { date: '2020.02', type: 'travel', desc: '강원도 삼척 여행' },
             { date: '2020.03', type: 'travel', desc: '제주도 여행' },
@@ -334,7 +316,6 @@
 
         function initConstellation() {
             container.innerHTML = '';
-            
             const renderCount = Math.min(rawData.length, ariesLayout.length);
             
             for(let i = 0; i < renderCount; i++) {
@@ -355,7 +336,6 @@
                 star.addEventListener('mouseleave', () => {
                     tt.classList.remove('show');
                 });
-                
                 container.appendChild(star);
             }
             drawLines();
@@ -363,10 +343,12 @@
 
         function drawLines() {
             const mapRect = document.querySelector('.constellation-map').getBoundingClientRect();
+            if(mapRect.width === 0) return; // 히든상태 방지
+            
             linesCanvas.width = mapRect.width;
             linesCanvas.height = mapRect.height;
-            
             lCtx.clearRect(0, 0, linesCanvas.width, linesCanvas.height);
+            
             lCtx.beginPath();
             lCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
             lCtx.lineWidth = 1;
@@ -405,9 +387,7 @@
         });
 
         window.addEventListener('resize', () => {
-            if(document.getElementById('chapter-taste').classList.contains('active')) {
-                drawLines();
-            }
+            if(document.getElementById('chapter-taste').classList.contains('active')) drawLines();
         });
 
         initConstellation();
