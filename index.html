@@ -11,10 +11,10 @@
         /* 인트로 비디오 */
         #intro-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 100;
-            transition: opacity 1s ease; cursor: pointer; background-color: #fff;
+            transition: opacity 1s ease; cursor: pointer; background-color: #000;
         }
 
-        /* 캔버스 및 찢김 트리거 (비밀 아지트) */
+        /* 캔버스 및 찢김 트리거 */
         #paper-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 50; pointer-events: none;
         }
@@ -28,7 +28,7 @@
         #trigger-3 { top: 25%; right: 20%; }
         #trigger-4 { bottom: 15%; right: 25%; }
 
-        /* 콘텐츠 레이어 공통 */
+        /* 콘텐츠 레이어 */
         #content-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;
             display: flex; justify-content: center; align-items: center; padding: 40px;
@@ -49,12 +49,11 @@
         .back-btn:hover { background: #333; color: #fff; }
         h2.chapter-title { font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; letter-spacing: -1px; }
 
-        /* Taste 챕터 특화 */
+        /* Taste 챕터 */
         .taste-layout { display: flex; gap: 40px; height: calc(100% - 80px); }
         .taste-left { flex: 1; display: flex; flex-direction: column; gap: 30px; }
         .taste-right { flex: 2; position: relative; background: #111; border-radius: 15px; overflow: hidden; }
 
-        /* LP 플레이어 */
         .lp-container { background: #fff; padding: 20px; border-radius: 15px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); text-align: center; }
         .turntable { width: 150px; height: 150px; background: #e0e0e0; border-radius: 50%; margin: 0 auto 20px; position: relative; border: 5px solid #ccc; }
         .turntable::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 10px; height: 10px; background: #666; border-radius: 50%; }
@@ -67,7 +66,6 @@
         .turntable.playing .record { position: absolute; top: 0; left: 0; width: 100%; height: 100%; animation: spin 4s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* 양자리 타임라인 */
         .constellation-map { width: 100%; height: 100%; position: relative; color: #fff; }
         .constellation-title { position: absolute; top: 20px; left: 20px; font-size: 1.2rem; color: #aaa; z-index: 2; }
         .filters { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 2; }
@@ -99,8 +97,8 @@
 </head>
 <body>
 
-    <!-- 1. 비디오 (에러 방지용 onerror 추가 및 강제 음소거 자동재생) -->
-    <video id="intro-video" src="./intro.mp4" autoplay muted playsinline onerror="hideVideo()"></video>
+    <!-- 직접 올리신 intro.mp4 정상 연결 (음소거 자동재생) -->
+    <video id="intro-video" src="./intro.mp4" autoplay muted playsinline></video>
 
     <canvas id="paper-canvas"></canvas>
 
@@ -182,17 +180,10 @@
             setTimeout(() => { video.style.display = 'none'; }, 500);
         }
         
-        // 영상 클릭 시 강제 스킵 (발표용 필수)
-        video.addEventListener('click', hideVideo);
-        // 영상 종류 시 넘어감
+        // 영상 끝나면 백지로
         video.addEventListener('ended', hideVideo);
-
-        // 만약 영상이 안불러와지면 3초 후 강제로 스킵 (먹통 방지 안전장치)
-        setTimeout(() => {
-            if(video.readyState === 0) {
-                hideVideo();
-            }
-        }, 3000);
+        // 클릭 시 바로 스킵 
+        video.addEventListener('click', hideVideo);
 
         // 캔버스 찢김 로직
         const canvas = document.getElementById('paper-canvas');
@@ -343,7 +334,7 @@
 
         function drawLines() {
             const mapRect = document.querySelector('.constellation-map').getBoundingClientRect();
-            if(mapRect.width === 0) return; // 히든상태 방지
+            if(mapRect.width === 0) return; 
             
             linesCanvas.width = mapRect.width;
             linesCanvas.height = mapRect.height;
